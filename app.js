@@ -12,7 +12,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // Set up a whitelist and check against it:
-var whitelist = ['http://localhost:3000']
+var whitelist = ['https://vgstats.xyz/','http://vgstats.xyz/']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -24,20 +24,20 @@ var corsOptions = {
 }
 
 // Then pass them to cors:
-app.use(cors(corsOptions));
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000);
 
-app.use(logger('dev'));
+app.use(logger('tiny'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/dev', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
